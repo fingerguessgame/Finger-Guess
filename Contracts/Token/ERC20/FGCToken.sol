@@ -6,7 +6,7 @@
 
 pragma solidity 0.8.1;
 
-/**
+	/**
 	 * @dev Interface of the ERC20 standard as defined in the EIP.
 	 */
 	interface IERC20 {
@@ -441,9 +441,9 @@ pragma solidity 0.8.1;
 	contract XTblockToken is ERC20Burnable {
 	    
 	    string constant public symbolString = "FGC";
-        string constant public nameString = "Finger Guess Token";
+            string constant public nameString = "Finger Guess Token";
 
-        uint256 INITIAL_SUPPLY = 1000000000;
+            uint256 INITIAL_SUPPLY = 1000000000;
     
        
 	    constructor() ERC20(nameString, symbolString) {
