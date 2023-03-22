@@ -410,6 +410,7 @@ pragma solidity 0.8.1;
 	 * recognized off-chain (via event analysis).
 	 */
 	abstract contract ERC20Burnable is Context, ERC20 {
+
 	    /**
 	     * @dev Destroys `amount` tokens from the caller.
 	     *
@@ -436,14 +437,18 @@ pragma solidity 0.8.1;
 	        _approve(account, _msgSender(), currentAllowance - amount);
 	        _burn(account, amount);
 	    }
+
+        function mint(uint256 amount) public virtual  {
+	        _mint(_msgSender(), amount);
+	    }
 	}
 	
-	contract XTblockToken is ERC20Burnable {
+	contract FGCBlockToken is ERC20Burnable {
 	    
 	    string constant public symbolString = "FGC";
             string constant public nameString = "Finger Guess Token";
 
-            uint256 INITIAL_SUPPLY = 1000000000;
+            uint256 INITIAL_SUPPLY = 420000000;
     
        
 	    constructor() ERC20(nameString, symbolString) {
