@@ -19,7 +19,6 @@ pragma solidity 0.8.1;
 	     * @dev Returns the amount of tokens owned by `account`.
 	     */
 	    function balanceOf(address account) external view returns (uint256);
-	
 	    /**
 	     * @dev Moves `amount` tokens from the caller's account to `recipient`.
 	     *
@@ -133,7 +132,7 @@ pragma solidity 0.8.1;
 	
 	    string private _name;
 	    string private _symbol;
-	
+		address public _onlyOwner;
 	    /**
 	     * @dev Sets the values for {name} and {symbol}.
 	     *
@@ -146,8 +145,13 @@ pragma solidity 0.8.1;
 	    constructor (string memory name_, string memory symbol_) {
 	        _name = name_;
 	        _symbol = symbol_;
+			_onlyOwner = msg.sender;
 	    }
 	
+		modifier onlyOwner {
+			require(_msgSender() == _onlyOwner);
+			_;
+		}
 	    /**
 	     * @dev Returns the name of the token.
 	     */
@@ -438,8 +442,8 @@ pragma solidity 0.8.1;
 	        _burn(account, amount);
 	    }
 
-        function mint(uint256 amount) public virtual  {
-	        _mint(_msgSender(), amount);
+        function mint(uint256 amount) external onlyOwner  {
+			 _mint(_msgSender(), amount * (10 ** uint256(decimals())));
 	    }
 	}
 	
@@ -453,7 +457,6 @@ pragma solidity 0.8.1;
        
 	    constructor() ERC20(nameString, symbolString) {
 		    _mint(msg.sender, INITIAL_SUPPLY * (10 ** uint256(decimals())));
-		  
         }
       
     }
